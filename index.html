@@ -1,4 +1,3 @@
-<?php include_once('functions.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,13 +23,16 @@
           <option value="#sg-fontStacks">Font-Stacks</option>
         </optgroup>
         <optgroup label="Base HTML">
-          <?php listMarkupAsOptions('base'); ?>
+            {{#each base}}
+                <option value="#sg-{{this.title}}">{{title}}</option>
+            {{/each}}
         </optgroup>
         <optgroup label="Patterns">
-          <?php listMarkupAsOptions('patterns'); ?>
+            {{#each patterns}}
+                <option value="#sg-{{this.title}}">{{title}}</option>
+            {{/each}}
         </optgroup>
     </select>
-    <input type="hidden" name="sg_uri" value="<?php echo $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]; ?>">
     <button type="submit" class="sg-submit-btn">Go</button>
   </form><!--/.sg-nav-->
 </div><!--/.sg-header-->
@@ -63,14 +65,56 @@
 
   <div class="sg-base-styles">
     <h1 class="sg-h1">Base HTML</h1>
-    <?php showMarkup('base'); ?>
+    {{#each base}}
+    <div class="sg-markup sg-section">
+        <div class="sg-display">
+            <h2 class="sg-h2"><a id="sg-{{this.title}}" class="sg-anchor">{{title}}</a></h2>
+            {{#if documentation}}
+            <div class="sg-doc">
+                <h3 class="sg-h3">Usage</h3>
+                {{{documentation}}}
+            </div>
+            {{/if}}
+            <h3 class="sg-h3">Example</h3>
+            {{{content}}}
+        </div>
+        <div class="sg-markup-controls"><a class="sg-btn sg-btn--source" href="#">View Source</a>
+            <a class="sg-btn--top" href="#top">Back to Top</a>
+        </div>
+        <div class="sg-source sg-animated">
+            <a class="sg-btn sg-btn--select" href="#">Copy Source</a>
+            <pre class="prettyprint linenums"><code>{{content}}</code></pre>
+        </div>
+    </div>
+    {{/each}}
   </div><!--/.sg-base-styles-->
 
   <div class="sg-pattern-styles">
     <h1 class="sg-h1">Patterns<small> - Design and markup patterns unique to your site.</small></h1>
-    <?php showMarkup('patterns'); ?>
-    </div><!--/.sg-pattern-styles-->
-  </div><!--/.sg-body-->
+    {{#each patterns}}
+    <div class="sg-markup sg-section">
+        <div class="sg-display">
+            <h2 class="sg-h2"><a id="sg-{{this.title}}" class="sg-anchor">{{title}}</a></h2>
+            {{#if documentation}}
+            <div class="sg-doc">
+                <h3 class="sg-h3">Usage</h3>
+                {{{documentation}}}
+            </div>
+            {{/if}}
+            <h3 class="sg-h3">Example</h3>
+            {{{content}}}
+        </div>
+        <div class="sg-markup-controls"><a class="sg-btn sg-btn--source" href="#">View Source</a>
+            <a class="sg-btn--top" href="#top">Back to Top</a>
+        </div>
+        <div class="sg-source sg-animated">
+            <a class="sg-btn sg-btn--select" href="#">Copy Source</a>
+            <pre class="prettyprint linenums"><code>{{content}}</code></pre>
+        </div>
+    </div>
+    {{/each}}
+  </div><!--/.sg-pattern-styles-->
+</div><!--/.sg-body-->
 
   <script src="js/sg-plugins.js"></script>
   <script src="js/sg-scripts.js"></script>
