@@ -23,10 +23,14 @@
           <option value="#sg-fontStacks">Font-Stacks</option>
         </optgroup>
         <optgroup label="Base HTML">
-          <?php listMarkupAsOptions('base'); ?>
+            {{#each base}}
+                <option value="#sg-{{this.title}}">{{title}}</option>
+            {{/each}}
         </optgroup>
         <optgroup label="Patterns">
-          <?php listMarkupAsOptions('patterns'); ?>
+            {{#each patterns}}
+                <option value="#sg-{{this.title}}">{{title}}</option>
+            {{/each}}
         </optgroup>
     </select>
     <!-- <input type="hidden" name="sg_uri" value="<?php echo $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]; ?>"> -->
@@ -65,7 +69,7 @@
     {{#each base}}
     <div class="sg-markup sg-section">
         <div class="sg-display">
-            <h2 class="sg-h2"><a id="sg-{{filename}}" class="sg-anchor">{{title}}</a></h2>
+            <h2 class="sg-h2"><a id="sg-{{this.title}}" class="sg-anchor">{{title}}</a></h2>
             {{#if documentation}}
             <div class="sg-doc">
                 <h3 class="sg-h3">Usage</h3>
@@ -80,11 +84,7 @@
         </div>
         <div class="sg-source sg-animated">
             <a class="sg-btn sg-btn--select" href="#">Copy Source</a>
-            <pre class="prettyprint linenums">
-                <code>
-                    {{content}}
-                </code>
-            </pre>
+            <pre class="prettyprint linenums"><code>{{content}}</code></pre>
         </div>
     </div>
     {{/each}}
@@ -95,7 +95,7 @@
     {{#each patterns}}
     <div class="sg-markup sg-section">
         <div class="sg-display">
-            <h2 class="sg-h2"><a id="sg-{{filename}}" class="sg-anchor">{{title}}</a></h2>
+            <h2 class="sg-h2"><a id="sg-{{this.title}}" class="sg-anchor">{{title}}</a></h2>
             {{#if documentation}}
             <div class="sg-doc">
                 <h3 class="sg-h3">Usage</h3>
@@ -110,11 +110,7 @@
         </div>
         <div class="sg-source sg-animated">
             <a class="sg-btn sg-btn--select" href="#">Copy Source</a>
-            <pre class="prettyprint linenums">
-                <code>
-                    {{content}}
-                </code>
-            </pre>
+            <pre class="prettyprint linenums"><code>{{content}}</code></pre>
         </div>
     </div>
     {{/each}}

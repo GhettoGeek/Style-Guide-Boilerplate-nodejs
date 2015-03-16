@@ -5,17 +5,17 @@
     var http = require("http"),
         fs = require("fs"),
         handlebars = require("handlebars"),
-        baseTemplate;
+        baseTemplate,
+        express = require('express'),
+        app = express(),
+        server;
 
     baseTemplate = fs.readFileSync("./index.html", "utf8");
 
-    function onRequest(req, res) {
-
-        console.log(req.url);
-
+    app.get('/', function (req, res) {
         var pageBuilder = handlebars.compile(baseTemplate),
             markupDirectory = "./markup/",
-            docDicrecotry = "./doc/",
+            docDirectory = "./doc/",
             baseFileList = fs.readdirSync(markupDirectory + 'base/'),
             patternFileList =  fs.readdirSync(markupDirectory + 'patterns/'),
             vm = {base: [], patterns: []},
@@ -29,7 +29,7 @@
                 type: 'base',
                 fileName: currentFile,
                 content: fs.readFileSync(markupDirectory + 'base/' + currentFile),
-                documentation: fs.readFileSync(docDicrecotry + 'base/' + currentFile)
+                documentation: fs.readFileSync(docDirectory + 'base/' + currentFile)
             });
         }
 
@@ -41,16 +41,26 @@
                 type: 'patterns',
                 fileName: currentFile,
                 content: fs.readFileSync(markupDirectory + 'patterns/' + currentFile),
-                documentation: fs.readFileSync(docDicrecotry + 'patterns/' + currentFile)
+                documentation: fs.readFileSync(docDirectory + 'patterns/' + currentFile)
             });
         }
+        console.log(vm.patterns);
 
         res.writeHead(200, {"Context-Type": "text/html"});
         res.write(pageBuilder(vm));
         res.end();
-    }
+    });
 
-    http.createServer(onRequest).listen(8000);
-    console.log("Server has started on port 8000.");
+    //Static files
+    app.use('/images', express.static('images'));
+    app.use('/css', express.static('css'));
+    app.use('/js', express.static('js'));
+
+    server = app.listen(8000, function () {
+        var host = server.address().address;
+        var port = server.address().port;
+
+        console.log('Example app listening at http://%s:%s', host, port);
+    });
 
 }(module.exports));
