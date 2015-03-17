@@ -1,3 +1,4 @@
+/*jslint node: true, plusplus: true, vars: true*/
 /*globals require, module, console */
 (function (exports) {
     "use strict";
@@ -21,10 +22,10 @@
             vm = {base: [], patterns: []},
             fileIndex;
 
-        for(fileIndex = 0; fileIndex < baseFileList.length; fileIndex++) {
+        for (fileIndex = 0; fileIndex < baseFileList.length; fileIndex++) {
             var currentFile = baseFileList[fileIndex];
 
-             vm.base.push({
+            vm.base.push({
                 title: currentFile.split('.', 1)[0],
                 type: 'base',
                 fileName: currentFile,
@@ -33,10 +34,10 @@
             });
         }
 
-        for(fileIndex = 0; fileIndex < patternFileList.length; fileIndex++) {
+        for (fileIndex = 0; fileIndex < patternFileList.length; fileIndex++) {
             var currentFile = patternFileList[fileIndex];
 
-             vm.patterns.push({
+            vm.patterns.push({
                 title: currentFile.split('.', 1)[0],
                 type: 'patterns',
                 fileName: currentFile,
@@ -57,10 +58,10 @@
     app.use('/js', express.static('js'));
 
     server = app.listen(8000, function () {
-        var host = server.address().address;
-        var port = server.address().port;
+        var host = server.address().address,
+            port = server.address().port;
 
-        console.log('Example app listening at http://%s:%s', host, port);
+        console.log('Server listening at http://%s:%s', host, port);
     });
 
 }(module.exports));
