@@ -45,7 +45,6 @@
                 documentation: fs.readFileSync(docDirectory + 'patterns/' + currentFile)
             });
         }
-        console.log(vm.patterns);
 
         res.writeHead(200, {"Context-Type": "text/html"});
         res.write(pageBuilder(vm));
