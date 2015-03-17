@@ -6,13 +6,12 @@
     var http = require('http'),
         fs = require('fs'),
         handlebars = require('handlebars'),
-        baseTemplate,
         express = require('express'),
+        baseTemplate = fs.readFileSync('./index.html', 'utf8'),
         app = express(),
         server;
 
-    baseTemplate = fs.readFileSync('./index.html', 'utf8');
-
+    // Index
     app.get('/', function (req, res) {
         var pageBuilder = handlebars.compile(baseTemplate),
             markupDirectory = './markup/',
@@ -51,12 +50,12 @@
         res.end();
     });
 
-    //Static files
+    // Static files
     app.use('/images', express.static('images'));
     app.use('/css', express.static('css'));
     app.use('/js', express.static('js'));
 
-    server = app.listen(8000, function () {
+    server = app.listen(parseInt(process.env.PORT, 10) || 8080, function () {
         var host = server.address().address,
             port = server.address().port;
 
