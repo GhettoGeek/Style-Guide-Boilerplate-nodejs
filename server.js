@@ -1,22 +1,22 @@
 /*jslint node: true, plusplus: true, vars: true*/
 /*globals require, module, console */
 (function (exports) {
-    "use strict";
+    'use strict';
 
-    var http = require("http"),
-        fs = require("fs"),
-        handlebars = require("handlebars"),
+    var http = require('http'),
+        fs = require('fs'),
+        handlebars = require('handlebars'),
         baseTemplate,
         express = require('express'),
         app = express(),
         server;
 
-    baseTemplate = fs.readFileSync("./index.html", "utf8");
+    baseTemplate = fs.readFileSync('./index.html', 'utf8');
 
     app.get('/', function (req, res) {
         var pageBuilder = handlebars.compile(baseTemplate),
-            markupDirectory = "./markup/",
-            docDirectory = "./doc/",
+            markupDirectory = './markup/',
+            docDirectory = './doc/',
             baseFileList = fs.readdirSync(markupDirectory + 'base/'),
             patternFileList =  fs.readdirSync(markupDirectory + 'patterns/'),
             vm = {base: [], patterns: []},
@@ -46,7 +46,7 @@
             });
         }
 
-        res.writeHead(200, {"Context-Type": "text/html"});
+        res.writeHead(200, {'Context-Type': 'text/html'});
         res.write(pageBuilder(vm));
         res.end();
     });
