@@ -29,3 +29,6 @@ nbproject
 # Folders to ignore
 node_modules
 bower_components
+
+# Ignore changes to user-replaced stylesheet
+/css/style.css
