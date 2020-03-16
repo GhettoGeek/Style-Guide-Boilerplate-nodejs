@@ -5,7 +5,7 @@ A starting point for crafting living style guides.
 
 This project is a port of [Style-Guide-Boilerplate](https://github.com/bjankord/Style-Guide-Boilerplate) from PHP to nodejs. It utilizes nodejs with express and handlebars to render the page.
 
-[View Demo](http://brettjankord.com/projects/style-guide-boilerplate/)
+[View Demo](http://bjankord.github.io/Style-Guide-Boilerplate/)
 
 *Note: Sample patterns have been included in the demo. Your site will have it's own unique patterns.*
 
